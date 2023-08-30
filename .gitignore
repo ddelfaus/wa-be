@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+
+# Environment variables
+.env
+
+# Build output
+dist/
+
+# Dependency directories
+bower_components/
+
+# Visual Studio Code settings
+.vscode/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# User-specific files
+.idea/
+*.suo
+*.user
+*.sln.docstates
