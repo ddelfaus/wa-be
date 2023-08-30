@@ -1,4 +1,7 @@
-const router = require('express').Router();
+const express = require('express')
+
+const router = express.Router();
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 
@@ -67,3 +70,6 @@ function signToken(user) {
   
     return jwt.sign(payload, secret, options); 
   }
+
+
+  module.exports = router

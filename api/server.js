@@ -1,4 +1,5 @@
 const express = require('express'); // import the express package
+const authRouter = require("../auth/auth-router.js")
 
 const server = express(); // creates the server
 
@@ -7,6 +8,9 @@ server.get('/', (req, res) => {
   res.send('Hello from Express');
 });
 
+
+
+server.use('/api/auth', authRouter)
 
 
 
