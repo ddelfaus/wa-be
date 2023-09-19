@@ -4,8 +4,8 @@
  */
 exports.up = function(knex) {
     return knex.schema.createTable('workouts', function (table) {
-        table.increments('workout_id').primary();
-        table.integer('user_id').unsigned().references('users.user_id');
+        table.increments('')
+        table.integer('user_id').unsigned().references('id');
         table.string('title').notNullable();
         table.text('description');
         table.integer('difficulty_rating');
