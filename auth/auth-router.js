@@ -56,6 +56,7 @@ router.post('/login', (req, res) => {
         }
       })
       .catch(error => {
+        console.error(error);
         res.status(500).json({ message: "failed finding account with that username "})
       });
   
