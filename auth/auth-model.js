@@ -9,10 +9,20 @@ module.exports = {
 }
 
 
+// async function add(user) {
+//     return db('users')
+//     .insert(user, 'id')
+// }
+
 async function add(user) {
-    return db('users')
-    .insert(user, 'id')
-}
+  
+    try {
+      const [id] = await db('users').insert(user, 'id');
+      return id;
+    } catch (error) {
+      throw error;
+    }
+  }
 
 
 function findBy(filter) {
