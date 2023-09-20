@@ -5,7 +5,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('moves', function (table) {
         table.increments('')
-        table.integer('workout_id').unsigned().references('id');
+      
         table.string('title').notNullable();
         table.text('description');
         table.integer('difficulty_rating');
@@ -14,7 +14,9 @@ exports.up = function(knex) {
         table.string('equipment_required');
         table.string('video_url'); // Store URL or ID for YouTube video
         table.integer('reps_completed').defaultTo(0);
-        // Add other move fields as needed
+        table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+
+       
         // table.timestamps(true, true);
         });
 };

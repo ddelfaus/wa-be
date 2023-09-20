@@ -5,13 +5,14 @@
 exports.up = function(knex) {
     return knex.schema.createTable('workouts', function (table) {
         table.increments('')
-        table.integer('user_id').unsigned().references('id');
+       
         table.string('title').notNullable();
         table.text('description');
         table.integer('difficulty_rating');
         table.integer('upvotes').defaultTo(0);
         table.string('equipment_required');
-        // Add other workout fields as needed
+        table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+      
         // table.timestamps(true, true);
     });
   
