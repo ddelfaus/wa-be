@@ -31,6 +31,6 @@ Thumbs.db
 
 #database
 /database/
-/db.sqlite3
+/dev.sqlite3
 /backup/
 /logs/
