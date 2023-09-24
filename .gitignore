@@ -28,3 +28,9 @@ Thumbs.db
 *.suo
 *.user
 *.sln.docstates
+
+#database
+/database/
+/db.sqlite3
+/backup/
+/logs/

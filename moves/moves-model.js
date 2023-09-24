@@ -13,8 +13,6 @@ module.exports = {
   updateMovesToWorkout
 };
 
-
-
 function getMoves() {
     return db('moves')
     
