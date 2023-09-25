@@ -24,18 +24,34 @@ router.get('/:id', authorized, (req, res) => {
     .then(moves => {
       res.status(200).json(moves)
 
-      // if (exercise && exercise.coach_id === coach_id) {
-      //   res.status(200).json(exercise);
-      // } else if (!exercise) {
-      //   res.status(404).json({ error: `cannot get exercise with id: ${id} because it does not exist` });
-      // } else {
-      //   res.status(403).json({ error: `you are not authorized to get exercise with id: ${id}`});
-      // }
     })
     .catch(error => {
       res.status(500).json(error);
     });
 });
+
+router.get('/move/:moveId',authorized, async (req, res) => {
+  const { moveId } = req.params;
+
+  try {
+    // Call the getMoveById method from your move model
+    const move = await Moves.getMoveByMoveId(moveId);
+
+    if (!move) {
+      return res.status(404).json({ message: 'Move not found' });
+    }
+
+    // Return the move data as JSON
+    res.status(200).json(move);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Export the router
+module.exports = router;
+
 
 router.post('/', authorized, (req, res) => {
   console.log(req.body)

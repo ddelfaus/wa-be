@@ -4,6 +4,7 @@ const db = require('../database/dbConfig.js');
 module.exports = {
   getMoves,
   getMovesById,
+  getMoveByMoveId,
   addMoves,
   updateMoves,
   deleteMoves,
@@ -21,17 +22,20 @@ function getMoves() {
   function getMovesById(id) {
     return db('moves')
       .where({ user_id: id})
-      // .first();
+     
   }
+
+  //get a specific move
+  function getMoveByMoveId(moveId) {
+    return db('moves').where({ id: moveId });
+  }
+
   
   function addMoves(moves) {
     return db
       .insert(moves, 'id')
       .into('moves')
-      // .then(ids => {
-      //   const [id] = ids;
-      //   return getMovesById(id);
-      // });
+ 
   }
   
   function updateMoves(moves) {
