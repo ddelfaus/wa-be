@@ -70,7 +70,7 @@ router.post('/', authorized, (req, res) => {
 
 
 
-router.put('/:id', authorized, (req, res) => {
+router.put('/:id', (req, res) => {
   const moveData = { ...req.body, id: req.params.id}
  
   console.log(moveData)
