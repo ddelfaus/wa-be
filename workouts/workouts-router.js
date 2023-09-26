@@ -29,7 +29,7 @@ router.get('/:id', authorized, (req, res) => {
     });
 });
 
-router.get('/:id/workout', authorized, (req, res) => {
+router.get('workout/:workoutId/', authorized, (req, res) => {
   Workouts.getSingleWorkout(req.params.id)
   .then(workout =>{
     res.json(workout)

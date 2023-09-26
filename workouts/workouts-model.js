@@ -27,10 +27,10 @@ function getWorkoutsById(id) {
     .where({ user_id: id})
 
 }
-function getSingleWorkout(id){
+function getSingleWorkout(workoutId){
   return db('workouts')
-    .where({id:id})
-    .first()
+    .where({id: workoutId})
+   
 }
 function addWorkouts(workout) {
   return db
