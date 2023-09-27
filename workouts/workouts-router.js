@@ -29,15 +29,24 @@ router.get('/:id', authorized, (req, res) => {
     });
 });
 
-router.get('workout/:workoutId/', authorized, (req, res) => {
-  Workouts.getSingleWorkout(req.params.id)
-  .then(workout =>{
-    res.json(workout)
-  })
-  .catch (err => { 
-    res.status(500).json({ message: "failed getting data make sure you have the right ID"})
-  })
-})
+router.get('/workout/:workoutId', authorized, async (req, res) => {
+  const { workoutId } = req.params;
+
+  try {
+    // Call the getMoveById method from your move model
+    const workout = await Workouts.getSingleWorkout(workoutId);
+
+    if (!workout) {
+      return res.status(404).json({ message: 'Move not found' });
+    }
+
+    // Return the move data as JSON
+    res.status(200).json(workout);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 router.post('/', authorized, (req, res) => {
   console.log(req.body)
 
