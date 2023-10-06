@@ -18,7 +18,6 @@ router.get('/', (req, res) => {
 
 router.get('/:id', authorized, (req, res) => {
   const id = req.params.id;
-  // const coach_id = req.token.coachID;
 
   Workouts.getWorkoutsById(id)
     .then(workout => {
@@ -51,7 +50,6 @@ router.post('/', authorized, (req, res) => {
   console.log(req.body)
 
   const workoutData = req.body;
-  // const user_id = req.token.userId
   Workouts.addWorkouts(workoutData)
     .then(workout => {
       res.status(201).json(workout);
@@ -91,7 +89,66 @@ router.delete('/:id', authorized, (req,res)=> {
   })
 })
 
+// assigning exercises to workouts
 
+
+router.get('/e-w/:id', authorized, (req, res) => {
+  const id = req.params.id;
+  Exercises.getExercisesInWorkout(id)
+    .then(exercises => {
+      res.status(200).json(exercises);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+
+
+
+
+router.post('/e-w', authorized, (req,res) => {
+  const exerciseData = {...req.body}
+  console.log(exerciseData)
+  Workouts.addExercisesToWorkout(exerciseData)
+  .then(exercise => {
+    res.status(201).json(exercise);
+  })  
+
+  .catch (err => {
+    res.status(500).json({ message: "failed, make sure you have all the needed fields and the correct ID"})
+  })
+})
+
+router.put('/e-w/:id', authorized, (req, res) => {
+  const exerciseData = { ...req.body, id: req.params.id}
+  
+  console.log(exerciseData)
+  Exercises.updateExerciseToWorkout(exerciseData)
+      .then(edit => {
+          res.status(201).json(exerciseData)
+      })
+      .catch (err => {
+          res.status(500).json({ message: "failed, make sure you have all the needed fields and the correct ID"})
+      })
+})
+
+
+
+
+
+
+router.delete('/e-w/:id', authorized, (req,res)=> {
+  const id = req.params.id
+  console.log(id)
+  Workouts.deleteExerciseToWorkout(id)
+  .then(exercise => {
+      res.status(200).json({ message: "deleted"})
+  })
+  .catch(err => {
+      res.status(500).json({ message: "failed to delete, Make sure you have the right ID"})
+  })
+})
 
 
 

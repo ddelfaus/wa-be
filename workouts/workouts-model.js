@@ -6,13 +6,15 @@ module.exports = {
   getWorkoutsById,
   getSingleWorkout,
   addWorkouts,
-  
   updateWorkouts,
   deleteWorkouts,
-  addWorkoutToProgram,
-  getWorkoutToProgram,
-  deleteWorkoutToProgram,
-  updateWorkoutToProgram
+  // exercise to workout
+  getExerciseInWorkout,
+  addExercisesToWorkout,
+  updateExerciseToWorkout,
+  deleteExerciseToWorkout,
+
+
 };
 
 
@@ -56,63 +58,32 @@ function deleteWorkouts(workout) {
 }
 
 
-// ex-pro
+// assigin exercise to workout
 
 
-function getWorkoutToProgram(id) {
-  return db('exercises_workouts')
-  .where({ workout_id: id})
-   
-}
-
-function addWorkoutToProgram(exerciseWorkout){
-  return db('exercises_workouts')
+function addExercisesToWorkout(exerciseWorkout){
+  return db('workout_exercise')
   .insert(exerciseWorkout, 'id')
-  .into('exercises_workouts')
+  .into('workout_exercise')
 }
 
-function updateWorkoutToProgram(exercise) {
-  return db('exercises_workouts')
-    .where({id: exercise.id})
-    .update(exercise)
-
-}
-
-function deleteWorkoutToProgram(exerciseWorkout) {
-  return db('exercises_workouts')
-    .where('id',exerciseWorkout)
-    .del();
-}
-
-
-
-
-// wo-p
-
-
-function getWorkoutToProgram(id) {
-  return db('workouts_programs')
+function getExerciseInWorkout(id) {
+  return db('workout_exercise')
   .where({ workout_id: id})
    
 }
 
-function addWorkoutToProgram(workoutProgram){
-  return db('workouts_programs')
-  .insert(workoutProgram, 'id')
-  .into('workouts_programs')
+function updateExerciseToWorkout(moves) {
+  return db('workout_exercise')
+    .where({id: moves.id})
+    .update(moves)
+
 }
 
-function updateWorkoutToProgram(workouts) {
-  return db('workouts_programs')
-    .where({id: workouts.id})
-    .update(workouts)
-  //   .then(() => {
-  //     return getExerciseById(exercise.id)
-  // })
-}
 
-function deleteWorkoutToProgram(workoutProgram) {
-  return db('workouts_programs')
-    .where('id',workoutProgram)
+
+function deleteExerciseToWorkout(exerciseWorkout) {
+  return db('workout_exercise')
+    .where('id',exerciseWorkout)
     .del();
 }
